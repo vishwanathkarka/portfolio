@@ -851,6 +851,10 @@ width:100vw;
       justify-content: center;
       align-items: center;
     }
+   
+    .social-media{
+      justify-content: center;
+    }
 }
 @media screen and (max-width: 563px) {
   .contain-main{
