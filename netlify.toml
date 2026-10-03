@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Required so Netlify runs the Next.js runtime (SSR, API routes, static assets).
+# Without it, the raw .next folder is published as static files and every route 404s.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
