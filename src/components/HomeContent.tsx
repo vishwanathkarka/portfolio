@@ -119,7 +119,10 @@ export default function HomeContent() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const email = 'hello@vishwanathkarka.com'
-  const mailtoHref = `mailto:${email}?subject=${encodeURIComponent('Project enquiry')}&body=${encodeURIComponent('Hi Vishwanath,\n\nI would like to discuss a project or opportunity with you.\n\n')}`
+  const emailSubject = 'Project enquiry'
+  const emailBody = 'Hi Vishwanath,\n\nI would like to discuss a project or opportunity with you.\n\n'
+  const mailtoHref = `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
+  const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
 
   async function copyEmail() {
     try {
@@ -184,7 +187,7 @@ export default function HomeContent() {
         <div className="hero-lower">
           <div className="hero-actions">
             <a className="primary-action" href="#work">View my work <ArrowDown size={16} /></a>
-            <a className="secondary-action" href={mailtoHref}>Let&apos;s talk <ArrowUpRight size={16} /></a>
+            <a className="secondary-action" href={gmailComposeHref} target="_blank" rel="noreferrer">Let&apos;s talk <ArrowUpRight size={16} /></a>
           </div>
         </div>
 
