@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { projects } from '@/data/projects'
 import {
   ArrowDown,
   ArrowRight,
@@ -10,6 +11,7 @@ import {
   Check,
   ChevronDown,
   Copy,
+  FileText,
   Github,
   Linkedin,
   Mail,
@@ -23,93 +25,81 @@ const experiences = [
     website: 'https://tv2z.com/',
     role: 'Software Engineer II',
     period: 'Jan 2026 — Present',
-    summary: 'Building core systems for an OTT streaming platform across discovery, playback continuity, access and content operations.',
+    summary: 'Building core systems for an OTT streaming platform across discovery, playback continuity, subscriber access and content operations.',
+    stack: ['Node.js', 'MySQL', 'Redis', 'Laravel'],
     points: [
       'Built the platform search and suggestion system from scratch.',
-      'Improved TV guide APIs through caching and query optimization.',
-      'Built Continue Watching, subscription access control and regional CMS workflows across 10+ modules.',
-      'Integrated a media library for importing channels and collections.',
+      'Replaced full S3 electronic programme guide (EPG) file downloads with an API returning only the requested channels and time window, reducing the amount of data viewers need to download.',
+      'Diagnosed EPG connection overhead (~200 ms per request versus ~68 ms of app work) and fixed connection reuse across Node.js, nginx and CloudFront.',
+      'Built Continue Watching so viewers can return to unfinished content.',
+      'Implemented user access control for subscriptions and content bundles.',
+      'Redesigned regional content setup in the admin CMS across 10+ modules.',
+      'Built digital asset management (DAM) integration for importing channels and collections into the platform.',
     ],
   },
   {
-    company: 'Brochill',
+    company: 'BroChill',
     website: 'https://brochill.com/',
-    role: 'Full-stack Developer',
+    role: 'Full Stack Developer',
     period: 'Jan 2025 — Dec 2025',
-    summary: 'Worked on the backend and internal product systems supporting an application with more than 50 million downloads.',
+    summary: 'BroChill is a social app with 50M+ downloads on Google Play. Worked across backend engineering, subscriptions, internal tools and deployment, directly with the co-founder.',
+    stack: ['Node.js', 'Next.js', 'Vue.js', 'MySQL', 'ClickHouse', 'Redis', 'MongoDB', 'Google Play Billing', 'Razorpay', 'Docker'],
     points: [
-      'Architected backend systems using MySQL, Redis and MongoDB.',
-      'Improved creator and admin panels for faster content management.',
-      'Built Razorpay alternative billing alongside Google Play Billing.',
+      'Designed and built the backend using Node.js, MySQL, Redis and MongoDB for an app with 50M+ downloads.',
+      'Integrated Google Play Billing and built the full subscription and payment flow.',
+      'Built alternative billing with Razorpay alongside Google Play Billing, giving users a choice of how to pay.',
+      'Improved creator and admin panels so content could be managed faster.',
+      'Built internal AI-based tools for content recommendations and content processing.',
+      'Worked directly with the co-founder on feature planning, architecture and scaling.',
+      'Set up stable Docker deployments and improved backend performance.',
     ],
   },
   {
-    company: 'Telugu Labs · Brochill',
+    company: 'Telugu Labs · BroChill',
+    projectId: 'engageon-tellow-ai',
     website: 'https://tellow.ai/',
-    role: 'Full-stack Developer',
+    role: 'Full Stack Developer',
     period: 'May 2024 — Dec 2024',
-    summary: 'Led development of two SaaS products, EngageON and Tellow.AI.',
+    summary: 'Built two major SaaS platforms, EngageON and Tellow AI, spanning AI generation, model integration, dashboards and payments.',
+    stack: ['Next.js', 'Node.js', 'Redis', 'MySQL', 'ClickHouse', 'Kafka', 'Cloudflare R2', 'Razorpay'],
     points: [
-      'Architected scalable applications with Redis, ClickHouse, MySQL and Kafka.',
-      'Used event-driven design for dependable product workflows.',
-      'Built reusable AI image and video components that made model integration 50% faster.',
+      'Built EngageON and Tellow AI using Next.js, Node.js and a multi-database architecture with Redis, MySQL and ClickHouse.',
+      'Designed scalable backend systems and implemented event-driven workflows using Kafka, reducing API response times.',
+      'Integrated AI image and video generation and character training pipelines, with flexible support for different models.',
+      'Built reusable backend and frontend components that reduced AI model onboarding time by 50%.',
+      'Developed end-to-end dashboards, admin systems, user panels and Razorpay payment integrations.',
     ],
   },
   {
     company: 'Eveez',
+    projectId: 'eveez-recovery-tracker',
     website: 'https://eveez.in/',
-    role: 'Full-stack Developer Intern',
+    role: 'Full Stack Developer Intern',
     period: 'Jan 2024 — Apr 2024',
-    summary: 'Built a Recovery Tracker application for live vehicle operations and evidence capture.',
+    summary: 'Developed the Recovery Tracker application for EV vehicles, bringing live status, battery insights and recovery operations into one workflow.',
+    stack: ['Next.js', 'Node.js', 'SQL', 'MongoDB', 'AWS S3', 'Tailwind CSS'],
     points: [
-      'Implemented live vehicle tracking and AWS S3 image uploads.',
-      'Worked across Next.js, Node.js, SQL, MongoDB and Tailwind CSS.',
+      'Developed Recovery Tracker with live status updates, battery insights and real-time vehicle monitoring.',
+      'Implemented vehicle validation through chassis number verification and image uploads with secure AWS S3 storage.',
+      'Built admin dashboards using Next.js and Node.js to track vehicle health, alerts and recovery progress.',
+      'Integrated third-party APIs for real-time vehicle telemetry and GPS tracking.',
+      'Worked across UI development, backend APIs, authentication and deployment support.',
     ],
   },
 ]
 
-const featuredProjects = [
-  {
-    id: 'still-discount',
-    title: 'Still Discount',
-    category: 'Full-stack · Learning',
-    description: 'A platform sharing verified 100%-off Udemy coupon codes that has helped 185,000+ learners enroll in courses for free.',
-    impact: '185K+ learners enrolled for free',
-    tags: ['Next.js', 'Node.js', 'Redis', 'ClickHouse', 'n8n'],
-    image: '/images/stilldiscount-free-courses-hero.png',
-    live: 'https://stilldiscount.com/',
-    source: '',
-  },
-  {
-    id: 'abnormal-event-detection',
-    title: 'Abnormal Event Detection on Pathway',
-    category: 'AI/ML · Video surveillance',
-    description: 'A real-time pathway surveillance system that uses YOLOv8 to detect abnormal events such as accidents, fighting, kidnapping and chain snatching.',
-    impact: 'Automated detection, recording and cloud storage',
-    tags: ['YOLOv8', 'Flask', 'OpenCV', 'Cloudinary'],
-    image: '/images/abnormal-event-detection-pathway.png',
-    live: '',
-    source: 'https://github.com/vishwanathkarka/Abnormal-Event-Detection-On-Pathway',
-  },
-  {
-    id: 'minspend',
-    title: 'MinSpend',
-    category: 'Android · Personal finance',
-    description: 'An Android app that reads bank SMS alerts, automatically tracks and categorizes expenses, and turns them into clear budgets, insights and reminders.',
-    impact: 'Coming soon · Internal testing',
-    tags: ['Android', 'SMS tracking', 'Budgets', 'Insights'],
-    image: '/images/minspend-expenses-autopilot.png',
-    live: '',
-    source: '',
-    status: 'Internal testing',
-  },
-]
+const featuredProjects = projects.slice(0, 3).map(project => ({
+  ...project,
+  live: project.liveLink,
+  source: project.githubLink,
+}))
 
 const skills = [
-  ['Languages', 'JavaScript, TypeScript, Python, Java, HTML, CSS'],
+  ['Languages', 'JavaScript, TypeScript, Kotlin, Python, Java, HTML, CSS'],
   ['Frontend', 'React.js, Next.js, Vue.js, Tailwind CSS, SCSS'],
   ['Backend & automation', 'Node.js, Express.js, REST APIs, Kafka, n8n'],
-  ['Data', 'MySQL, MongoDB, Redis, ClickHouse'],
+  ['Data', 'MySQL, MongoDB, Redis, ClickHouse, Room'],
+  ['Android', 'Jetpack Compose, WorkManager, Hilt'],
   ['Cloud & tools', 'AWS, Docker, Git, GitHub, Vercel'],
   ['Design', 'Figma, UI/UX fundamentals'],
   ['Product thinking', 'Product planning, product analysis, user research, product design fundamentals, SEO, product marketing basics'],
@@ -122,7 +112,6 @@ export default function HomeContent() {
   const emailSubject = 'Project enquiry'
   const emailBody = 'Hi Vishwanath,\n\nI would like to discuss a project or opportunity with you.\n\n'
   const mailtoHref = `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
-  const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
 
   async function copyEmail() {
     try {
@@ -148,7 +137,7 @@ export default function HomeContent() {
           <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a className="resume-link" href="/Vishwanath_Reddy_K_resume.pdf" target="_blank" rel="noreferrer">
+          <a className="resume-link" href="/Vishwanath-Reddy-Karka-Resume.pdf" target="_blank" rel="noreferrer">
             Résumé <ArrowUpRight size={14} />
           </a>
         </nav>
@@ -184,10 +173,12 @@ export default function HomeContent() {
           </p>
         </div>
 
+        <p className="hero-context">Software Engineer II at TV2Z · Hyderabad<br />Node.js, TypeScript and full-stack engineering across OTT and SaaS.</p>
+
         <div className="hero-lower">
           <div className="hero-actions">
             <a className="primary-action" href="#work">View my work <ArrowDown size={16} /></a>
-            <a className="secondary-action" href={gmailComposeHref} target="_blank" rel="noreferrer">Let&apos;s talk <ArrowUpRight size={16} /></a>
+            <a className="secondary-action" href="/Vishwanath-Reddy-Karka-Resume.pdf" target="_blank" rel="noreferrer">View résumé <FileText size={16} aria-hidden="true" /></a>
           </div>
         </div>
 
@@ -201,12 +192,12 @@ export default function HomeContent() {
 
         <div className="experience-intro">
           <h2>Experience building products that people actually use.</h2>
-          <p>Product engineering across SaaS, mobility operations and modern full-stack applications.</p>
+          <p>Product engineering across OTT streaming, a social app with 50M+ downloads, SaaS and mobility operations.</p>
         </div>
 
         <div className="experience-list">
           {experiences.map((experience, index) => (
-            <details key={experience.company} open={index === 0}>
+            <details key={experience.company} open={index < 2}>
               <summary>
                 <span className="experience-dot">{String(index + 1).padStart(2, '0')}</span>
                 <span className="experience-title">
@@ -227,7 +218,9 @@ export default function HomeContent() {
               </summary>
               <div className="experience-detail">
                 <p>{experience.summary}</p>
+                <p className="experience-stack"><strong>Tech stack</strong> {experience.stack.join(', ')}</p>
                 <ul>{experience.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                {experience.projectId && <Link className="experience-case-link" href={`/projects/${experience.projectId}`}>Read the project case study <ArrowRight size={14} aria-hidden="true" /></Link>}
               </div>
             </details>
           ))}
@@ -253,24 +246,25 @@ export default function HomeContent() {
             <article className="featured-project" key={project.id}>
               {project.live ? (
                 <a className="featured-project-image" href={project.live} target="_blank" rel="noreferrer">
-                  <Image src={project.image} alt={`${project.title} preview`} fill sizes="(max-width: 760px) 100vw, 62vw" />
+                  <Image src={project.image!} alt={`${project.title} preview`} fill sizes="(max-width: 760px) 100vw, 62vw" />
                   <span className="featured-project-launch"><ArrowUpRight size={19} /></span>
                 </a>
               ) : (
                 <div className="featured-project-image">
-                  <Image src={project.image} alt={`${project.title} preview`} fill sizes="(max-width: 760px) 100vw, 62vw" />
+                  <Image src={project.image!} alt={`${project.title} preview`} fill sizes="(max-width: 760px) 100vw, 62vw" />
                   {'status' in project && <span className="featured-project-status">{project.status}</span>}
                 </div>
               )}
               <div className="featured-project-copy">
                 <small>0{index + 1} / {project.category}</small>
-                <h3>{project.title}</h3>
+                <h3><Link href={`/projects/${project.id}`}>{project.title}</Link></h3>
                 <p>{project.description}</p>
                 <ul className="project-tags" aria-label={`${project.title} technologies`}>
                   {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
                 </ul>
                 <p className="project-impact"><span aria-hidden="true" />{project.impact}</p>
                 <div>
+                  <Link href={`/projects/${project.id}`}>Project details <ArrowRight size={14} /></Link>
                   {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live project <ArrowUpRight size={14} /></a>}
                   {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <Github size={14} /></a>}
                   {!project.live && !project.source && <span className="project-coming-soon">Coming soon</span>}
@@ -293,7 +287,7 @@ export default function HomeContent() {
             <p>
               My journey started with WordPress in 2019 and grew into full-stack product development. Today I work across the complete product journey—from understanding the problem and planning the experience to designing, building, launching and improving the final product. I combine full-stack engineering with practical product thinking, UI/UX fundamentals and growth awareness.
             </p>
-            <a href="/Vishwanath_Reddy_K_resume.pdf" target="_blank" rel="noreferrer">Read my résumé <ArrowUpRight size={15} /></a>
+            <a href="/Vishwanath-Reddy-Karka-Resume.pdf" target="_blank" rel="noreferrer">Read my résumé <ArrowUpRight size={15} /></a>
           </div>
           <div className="skills-list">
             {skills.map(([title, list]) => (

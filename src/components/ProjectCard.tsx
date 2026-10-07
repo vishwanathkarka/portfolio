@@ -57,7 +57,7 @@ export const ProjectCard = ({ project, isDetailed = false, allProjects = [] }: P
             {project.title}
           </span>
           <div>
-            Hello
+            {project.description}
           </div>
         </div>
       </Link>
@@ -74,7 +74,9 @@ export const ProjectCard = ({ project, isDetailed = false, allProjects = [] }: P
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link 
-                    href={project.liveLink} 
+                    href={project.liveLink}
+                    aria-label={`View ${project.title} live site`}
+                    rel="noopener noreferrer"
                     target="_blank" 
                     className="bg-neutral-200 border-2 border-black dark:bg-neutral-800 dark:border-neutral-500 p-1.5 rounded-full hover:opacity-70 touch-manipulation active:opacity-75"
                     style={{ 
@@ -96,7 +98,9 @@ export const ProjectCard = ({ project, isDetailed = false, allProjects = [] }: P
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link 
-                    href={project.githubLink} 
+                    href={project.githubLink}
+                    aria-label={`View ${project.title} source on GitHub`}
+                    rel="noopener noreferrer"
                     target="_blank" 
                     className="bg-neutral-200 border-2 border-black dark:bg-neutral-800 dark:border-neutral-500 p-1.5 rounded-full hover:opacity-70 touch-manipulation active:opacity-75"
                     style={{ 
@@ -210,6 +214,27 @@ export const ProjectCard = ({ project, isDetailed = false, allProjects = [] }: P
           </div>
         </div>
       </div>
+
+      {project.caseStudy && (
+        <div className="project-case-study">
+          <section aria-labelledby="project-problem">
+            <h2 id="project-problem">The problem</h2>
+            <p>{project.caseStudy.problem}</p>
+          </section>
+          <section aria-labelledby="project-contribution">
+            <h2 id="project-contribution">What I built</h2>
+            <ul>{project.caseStudy.contribution.map((item) => <li key={item}>{item}</li>)}</ul>
+          </section>
+          <section aria-labelledby="project-outcome">
+            <h2 id="project-outcome">Outcome & status</h2>
+            <p>{project.caseStudy.outcome}</p>
+          </section>
+          <div className="project-detail-actions">
+            <Link href="/Vishwanath-Reddy-Karka-Resume.pdf" target="_blank" rel="noreferrer">View résumé <FiArrowUpRight aria-hidden="true" /></Link>
+            <Link href="/#contact">Get in touch <FiArrowUpRight aria-hidden="true" /></Link>
+          </div>
+        </div>
+      )}
 
       {isDetailed && allProjects.length > 0 && (
         <ProjectNavigation currentProject={project} allProjects={allProjects} />

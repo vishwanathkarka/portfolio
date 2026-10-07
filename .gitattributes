@@ -1,0 +1,2 @@
+# PDF assets must not be treated as text or normalized on checkout.
+*.pdf binary

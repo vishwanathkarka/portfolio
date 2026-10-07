@@ -1,53 +1,39 @@
-'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight, ArrowUpRight, Github } from 'lucide-react'
+import ProjectShell from './ProjectShell'
+import type { Project } from '@/types/project'
 
-import OnekoCat from '@/components/OnekoCat'
-import { MasonryGrid } from '@/components/MasonryGrid'
-import FadeIn from '@/components/FadeIn'
-import DiagonalPattern from '@/components/DiagonalPattern'
-import PageNavigation from '@/components/Navigation'
-import { Project } from '@/types/project'
-
-interface ProjectsListClientProps {
-  projects: Project[]
-}
-
-export default function ProjectsListClient({ projects }: ProjectsListClientProps) {
+export default function ProjectsListClient({ projects }: { projects: Project[] }) {
   return (
-    <div className="min-h-screen transition-colors duration-300 relative" style={{ fontFamily: 'var(--font-hk-grotesk)' }}>
-      <OnekoCat />
-      <div className="relative mx-auto max-w-4xl">
-        <DiagonalPattern side="left" topOffset="0" />
-        <DiagonalPattern side="right" topOffset="0" />
-        
-        <div className="mx-auto sm:w-[calc(100%-120px)] w-full max-w-4xl sm:px-0">
-          <div className="prose dark:prose-invert max-w-none">
-            <div className="text-base">
-              <FadeIn delay={0.1} duration={0.5}>
-                <div className="sm:px-12 py-2">
-                  <div className="px-4 mb-4 sm:mb-6 pt-4 sm:pt-6">
-                    <div className="mb-4 sm:mb-6">
-                      <PageNavigation />
-                    </div>
-                    <h1 className="text-2xl sm:text-3xl font-[family-name:var(--font-instrument-serif)] italic font-medium mb-4 text-neutral-900 dark:text-neutral-100 tracking-tight">
-                      proof of work
-                    </h1>
-                    <p className="text-lg text-neutral-500 dark:text-neutral-400 tracking-wide">
-                      A showcase of my work and side projects.
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-              
-              <div className="sm:px-12 py-2">
-                <div className="px-4">
-                  <MasonryGrid projects={projects} />
-                </div>
-              </div>
-              <div className="pb-24 sm:pb-28" />
+    <ProjectShell>
+      <header className="project-story-heading project-index-heading">
+        <p className="project-eyebrow">Selected work & experiments</p>
+        <h1>Built to be useful.</h1>
+        <p className="project-lede">The products, problems and engineering decisions behind my work.</p>
+      </header>
+      <div className="project-index">
+        {projects.map(project => {
+          const hasCaseStudy = Boolean(project.caseStudy)
+          const destination = hasCaseStudy ? `/projects/${project.id}` : project.githubLink || project.liveLink || `/projects/${project.id}`
+          const external = destination.startsWith('http')
+          const action = hasCaseStudy ? 'Project details' : project.githubLink ? 'View source code' : project.liveLink ? 'View live project' : 'Project details'
+          return (
+          <article key={project.id} className="project-index-item">
+            <Link href={destination} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} className="project-index-image" aria-label={external ? `Open ${project.title}` : `Read about ${project.title}`} >
+              {project.image && <Image src={project.image} alt={`${project.title} preview`} width={900} height={600} sizes="(max-width: 760px) 100vw, 500px" />}
+            </Link>
+            <div>
+              <p className="project-eyebrow">{project.date}</p>
+              <h2>{external ? <a href={destination} target="_blank" rel="noreferrer">{project.title}</a> : <Link href={destination}>{project.title}</Link>}</h2>
+              <p className="project-index-description">{project.description}</p>
+              <ul className="project-tags" aria-label={`${project.title} technologies`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+              {external ? <a className="project-back" href={destination} target="_blank" rel="noreferrer">{action} {project.githubLink ? <Github size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}</a> : <Link className="project-back" href={destination}>{action} <ArrowRight size={16} aria-hidden="true" /></Link>}
             </div>
-          </div>
-        </div>
+          </article>
+          )
+        })}
       </div>
-    </div>
+    </ProjectShell>
   )
 }

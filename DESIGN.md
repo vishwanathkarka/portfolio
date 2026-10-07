@@ -3,14 +3,14 @@ version: alpha
 name: "Vishwanath Reddy Portfolio"
 description: "A dark editorial portfolio that lets recruiters understand Vishwanath's identity, product-engineering range, and strongest work quickly."
 colors:
-  primary: "#FF6338"
+  primary: "#60D394"
   background: "#060606"
   surface: "#0D0D0D"
   surface-raised: "#141414"
   text-primary: "#FFFFFF"
   text-muted: "#B2B2B2"
   ambient: "#373737"
-  accent: "#FF6338"
+  accent: "#60D394"
   success: "#45A96A"
   border: "rgba(255, 255, 255, 0.09)"
 typography:
@@ -43,7 +43,7 @@ components:
 
 ### Creative North Star
 
-The portfolio should feel like a developer's sharply art-directed personal dossier viewed in a dark studio: near-black paper, precise white type, quiet graphite light, and one controlled orange annotation color. It is not a SaaS dashboard and should not inherit dashboard-card density from the visual references that informed its palette.
+The portfolio should feel like a developer's sharply art-directed personal dossier viewed in a dark studio: near-black paper, precise white type, quiet graphite light, and one controlled green annotation color. It is not a SaaS dashboard and should not inherit dashboard-card density from the visual references that informed its palette.
 
 ### Product context and register
 
@@ -52,14 +52,14 @@ The portfolio should feel like a developer's sharply art-directed personal dossi
 - **Locale and language policy:** English is the maintained interface language. Copy uses short, direct sentences and active verbs.
 - **Usage scene:** Desktop-first portfolio review with complete mobile support; visitors often scan quickly before opening projects or the résumé.
 - **Register:** Brand/content site. Expression belongs in the hero and project media; navigation and actions remain familiar.
-- **Memorable signature:** The portrait embedded inside the oversized introduction, paired with orange emphasis on “full-stack products.”
+- **Memorable signature:** The portrait embedded inside the oversized introduction, paired with green emphasis on “full-stack products.”
 - **Restraint:** Supporting copy, section chrome, tags, borders, and motion stay quiet so the signature remains singular.
-- **Anti-references:** Avoid generic AI-company dashboards, glass-card grids, neon cyberpunk treatments, orange gradients, ornamental section numbering, and excessive ambient animation.
+- **Anti-references:** Avoid generic AI-company dashboards, glass-card grids, neon cyberpunk treatments, green gradients, ornamental section numbering, and excessive ambient animation.
 - **Token ownership/runtime mapping:** Runtime CSS variables in `src/app/globals.css` are canonical. This document mirrors accepted values and intent; `.portfolio-page` maps the palette to `--portfolio-*` variables consumed by homepage components.
 
 ## Colors
 
-`#060606` is the continuous canvas. `#FFFFFF` is reserved for primary headings and high-emphasis actions; `#B2B2B2` carries supporting information. `#373737` supplies restrained ambient depth and neutral marks, not large opaque panels. `#FF6338` is expressive rather than semantic and is limited to the hero phrase, small labels, and selected details. `#45A96A` only communicates availability. Borders use translucent white so hierarchy comes from light rather than outlines.
+`#060606` is the continuous canvas. `#FFFFFF` is reserved for primary headings and high-emphasis actions; `#B2B2B2` carries supporting information. `#373737` supplies restrained ambient depth and neutral marks, not large opaque panels. `#60D394` is expressive rather than semantic and is limited to the hero phrase, small labels, and selected details. `#45A96A` only communicates availability. Borders use translucent white so hierarchy comes from light rather than outlines.
 
 The portfolio is intentionally dark-only. High-contrast and forced-color modes must retain system-operable controls and focus indicators.
 
@@ -73,7 +73,7 @@ The homepage uses a centered 1040px editorial column over a quiet twelve-column 
 
 ## Elevation & Depth
 
-Depth comes from a graphite radial glow near the hero, tonal surfaces, and thin inset highlights. Static content remains mostly flat. Project media may use a soft deep shadow; pills use only a faint inset highlight. Orange glow is limited to the final contact area. Do not add floating glass panels behind hero copy.
+Depth comes from a graphite radial glow near the hero, tonal surfaces, and thin inset highlights. Static content remains mostly flat. Project media may use a soft deep shadow; pills use only a faint inset highlight. Green glow is limited to the final contact area. Do not add floating glass panels behind hero copy.
 
 ## Shapes
 
@@ -83,11 +83,11 @@ Actions, status chips, and compact navigation controls use pill geometry. The in
 
 ### Foundational visual states
 
-Interactive elements require visible hover, focus-visible, and active feedback. Focus uses the orange accent with clear offset. Disabled or busy states must retain geometry and expose state beyond color. Reduced-motion mode removes entrance and hover movement.
+Interactive elements require visible hover, focus-visible, and active feedback. Focus uses the green accent with clear offset. Disabled or busy states must retain geometry and expose state beyond color. Reduced-motion mode removes entrance and hover movement.
 
 ### Buttons and actions
 
-The primary hero action is white on black; the secondary action is transparent with a low-contrast border. Both are at least 44px high and retain text labels beside icons. Orange is not used as a button fill because it would compete with the hero signature.
+The primary hero action is white on black; the secondary action is transparent with a low-contrast border. Both are at least 44px high and retain text labels beside icons. Green is not used as a button fill because it would compete with the hero signature.
 
 ### Navigation and data display
 
@@ -111,7 +111,25 @@ Copy is direct and evidence-led. Project descriptions explain the problem or out
 
 ## Do's and Don'ts
 
-- **Do:** Preserve the portrait-in-headline signature and one controlled orange phrase.
+- **Do:** Preserve the portrait-in-headline signature and one controlled green phrase.
 - **Do:** Use white, muted grey, and spacing—not more cards—to create hierarchy.
 - **Don't:** Turn the portfolio into a monochrome SaaS template or dashboard.
 - **Don't:** hide scrollbars, reduce essential copy below readable sizes, or rely on hover alone.
+
+### Recruiter review path
+
+The hero pairs “View my work” with “View résumé,” with the current role and core engineering stack immediately above. Contact remains in the header and final section. The canonical résumé is `/Vishwanath-Reddy-Karka-Resume.pdf`; preserve the old underscore URL as an alias for existing links. Website contact uses hello@vishwanathkarka.com; retain the supplied résumé email in the PDF.
+
+Featured projects link to internal detail pages as well as available live/source destinations. Every maintained project describes its problem, implementation and outcome or current status. Metrics must come from supplied résumé or project evidence; internal testing must not be presented as a public launch. Preserve the current hero signature, palette and typography.
+
+### Shared project presentation
+
+All routes are dark-only, enforced at the root independently of operating-system preference or a saved theme. Project index and detail pages use ProjectShell with the homepage’s 1040px column, local Clash typography, near-black canvas, green accent and pill actions. Detail content uses readable editorial sections, not the former template’s cat, diagonal rails or theme switch. Green #60D394 replaces orange across emphasis, focus and contact glow.
+
+### Project evidence
+
+Long-form project pages use dated metrics, ordered implementation flows, engineering decisions and captioned evidence images. Render these only when source content exists. Metrics always show their reporting period and measure; traffic is not enrollment. Homepage featured cards derive from the shared project data. Keep the dark/green identity and show native-sized evidence images through full-size links.
+
+### Experience content
+
+Each company entry contains product context, an explicit technology stack and complete supported responsibilities. TV2Z and BroChill start expanded; every disclosure remains independently operable. Detailed copy uses 14px text and relaxed line spacing for longer descriptions. Downloads describe the app’s reach, not active users.
